@@ -2,7 +2,9 @@
 FROM node:20 AS build
 WORKDIR /app
 COPY . .
-RUN npm install && npm run build
+RUN npm install \
+	&& chmod +x node_modules/.bin/* \
+	&& npm run build
 
 # Etapa 2: Servir la app estática con nginx
 FROM nginx:alpine
